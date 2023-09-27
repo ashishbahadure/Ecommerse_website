@@ -1,0 +1,85 @@
+<%- include ('nav.ejs') %>
+<form action="/admin/save_product" method="post" enctype="multipart/form-data">
+    <div class="container-fluid bg-white p-3">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-dark">Add New product</h3>
+            </div>
+            <div class="col-md-4 mt-3">
+                <label class="text-dark">Select Category</label>
+                <select class="form-control" name="cat_id" id="cat_id" required onchange="getSubCategory()">
+                    <option></option>
+                    <% for(i=0;i<catlist.length;i++){ %>
+                        <option value="<%=catlist[i].category_id%>"><%=catlist[i].category_name%></option>
+                    <% } %>
+                </select>
+            </div>
+            <div class="col-md-4 mt-3">
+                <label class="text-dark">Select Sub-Category</label>
+                <select class="form-control" name="sub_cat_id" id="sub_cat_id">
+                    <option></option>
+                </select>
+            </div>
+            <div class="col-md-4 mt-3">
+                <label class="text-dark">Enter Product Name</label>
+                <input type="text" name="product_name" class="form-control">
+            </div>
+            <div class="col-md-4 mt-3">
+                <label class="text-dark">Enter Product Price</label>
+                <input type="text" name="product_price" class="form-control">
+            </div>
+            <div class="col-md-4 mt-3">
+                <label class="text-dark">Product Duplicate Price</label>
+                <input type="text" name="duplicate_price" class="form-control">
+            </div>
+            <div class="col-md-4 mt-3">
+                <label class="text-dark">Product Image</label>
+                <input type="file" name="product_image" class="form-control">
+            </div>
+            <div class="col-md-4 mt-3">
+                <label class="text-dark">Product Company</label>
+                <input type="text" name="product_company" class="form-control">
+            </div>
+            <div class="col-md-4 mt-3">
+                <label class="text-dark">Product Color</label>
+                <input type="color" name="product_color" class="form-control">
+            </div>
+            <div class="col-md-4 mt-3">
+                <label class="text-dark">Product Rating</label>
+                <input type="text" name="product_rating" class="form-control">
+            </div>
+            <div class="col-md-12 mt-3">
+                <label class="text-dark">Product Description</label>
+                <textarea name="product_discription" class="form-control"></textarea>
+            </div>
+            <div class="col-md-12 mt-3 text-right">
+                <button class="btn btn-primary">SAVE PRODUCT</button>
+            </div>
+        </div>
+    </div>
+</form>
+    <script>
+        function getSubCategory()
+        {
+            var catid = $("#cat_id").val();
+            // alert(catid);
+            $.ajax({
+					url:'/admin/getSubcategory_by_ajax',
+					type:'post',
+					dataType:'json',
+					data:{'cat_id':catid}
+				}).done(function(result)
+                {
+                    var output="<option></option>";
+                    for(i=0;i<result.length;i++)
+                    {
+                        output+=`<option value="${result[i].subcategory_id}">${result[i].sub_cat_name}</option>`;
+                    }
+                    console.log(output);
+                    $("#sub_cat_id").html(output);
+    			});
+        }
+    </script>
+<%- include ('footer.ejs') %>
+
+

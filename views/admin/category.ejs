@@ -1,0 +1,47 @@
+<%- include ('nav.ejs') %>
+<form action="/admin/savecategory" method="post">
+    <div class="container-fluid bg-white p-3">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-dark mb-3">Add New Category</h3>
+            </div>
+            <div class="col-md-6">
+                <label class="text-dark">Enter Category Name</label>
+                <input type="text" name="category_name" class="form-control">
+            </div>
+            <div class="col-md-12 mt-2">
+                <button class="btn btn-primary btn-sm">SAVE CATEGORY</button>
+            </div>
+        </div>
+    </div>
+</form>	
+<br>
+<div class="container-fluid bg-white p-3">
+    <div class="row">
+        <div class="col-12">
+            <h3 class="text-dark mb-3">Category List</h3>
+        </div>
+        <div class="col-12">
+            <table class="table table-border">
+                <tr>
+                    <th width="1%"></th>
+                    <th class="text-dark">SN</th>
+                    <th class="text-dark">Category Name</th>
+                </tr>
+                <% for(i=0;i<categoryList.length;i++){ %>
+                <!-- Start For -->
+                <tr class="text-dark">
+                    <td style="white-space: nowrap;">
+                        <button class="btn btn-primary p-0 pl-1 pr-1"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-danger p-0 pl-1 pr-1"><i class="fa fa-trash"></i></button>
+                    </td>
+                    <td><%=i+1%></td>
+                    <td><%=categoryList[i].category_name%></td>
+                </tr>
+                <!-- End For -->
+                <% } %>
+            </table>
+        </div>
+    </div>
+</div>
+<%- include ('footer.ejs') %>

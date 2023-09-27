@@ -1,0 +1,53 @@
+<%- include ('nav.ejs') %>
+<form action="/admin/savesubcategory" method="post">
+    <div class="container-fluid bg-white p-3">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-dark">Add Sub-Category</h3>
+            </div>
+            <div class="col-md-6 mt-3">
+                <label class="text-dark">SELECT CATEGORY</label>
+                <select class="form-control" name="cat_id">
+                    <% for(i=0;i<catlist.length;i++){ %>
+                    <option value="<%=catlist[i].category_id%>"><%=catlist[i].category_name%></option>
+                    <% } %>
+                </select>
+            </div>
+            <div class="col-md-6 mt-3">
+                <label class="text-dark">Enter Sub-Category Name</label>
+                <input type="text" class="form-control" name="sub_cat_name">
+            </div>
+            <div class="col-md-12 mt-3 mb-2 text-right">
+                <button class="btn btn-primary">Save Sub-Category</button>
+            </div>
+        </div>
+    </div>
+</form>
+<br>
+
+<div class="container-fluid bg-white p-3">
+    <div class="row">
+        <div class="col-12">
+            <h3 class="text-dark mb-3">Sub-Category List</h3>
+        </div>
+        <div class="col-12">
+            <table class="table table-border">
+                <tr>
+                    <th class="text-dark">SN</th>
+                    <th class="text-dark">CATEGORY NAME</th>
+                    <th class="text-dark">SUBCATEGORY NAME</th>
+                </tr>
+                <% for(i=0;i<subcatlist.length;i++){ %>
+                    <tr>
+                        <td class="text-dark"><%= i+1 %></td>
+                        <td class="text-dark"><%=subcatlist[i].category_name%></td>
+                        <td class="text-dark"><%=subcatlist[i].sub_cat_name%> </td>
+                    </tr>
+                <% } %>
+            </table>
+        </div>
+    </div>
+</div>
+<%- include ('footer.ejs') %>
+
+

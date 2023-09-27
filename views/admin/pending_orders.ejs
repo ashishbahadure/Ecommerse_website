@@ -1,0 +1,37 @@
+<%- include ('nav.ejs') %>
+    <div class="container-fluid bg-white p-3">
+        <div class="row">
+            <div class="col-12">
+                <h3>Pending Orders</h3>
+            </div>
+            <div class="col-12">
+                <table class="table table-bordered text-dark">
+                    <tr>
+                        <th>Action</th>
+                        <th>SN</th>
+                        <th>Order date</th>
+                        <th>Customer Name</th>
+                        <th>Order Amount</th>
+                        <th>Order Qty</th>
+                    </tr>
+                    <% for(i=0;i<orders.length;i++) { %>
+                    <tr>
+                        <td>
+                            <a href="/admin/send_to_processing?id=<%=orders[i].order_tbl_id%>">
+                                <button class="btn btn-primary p-0 pl-1 pr-1">Send To Processing</button>
+                            </a>
+                        </td>
+                        <td><%=i+1%></td>
+                        <td><%=orders[i].order_date.split("-").reverse().join("-")%></td>
+                        <td><%=orders[i].user_name%></td>
+                        <td><%=orders[i].ttl_order_amt%></td>
+                        <td><%=orders[i].ttl_order_qty%></td>
+                    </tr>
+                    <% } %>
+                </table>
+            </div>
+        </div>
+    </div>	
+<%- include ('footer.ejs') %>
+
+
